@@ -1,0 +1,11 @@
+#pragma once
+#include "plugin.h"
+
+class Hooks {
+public:
+  static void TemplateHooksVC();
+  static void TemplateHooksIII();
+  static void TemplateHooksSA();
+  static void DebugTemplates();
+  static void TriggerHudInfoDisplay();
+};
