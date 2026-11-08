@@ -1,7 +1,7 @@
 #include "../includes/UIConfig.h"
 
 // Standard config paths
-#define UI_INI_PATH GAME_PATH("charlesvercetti_mods\\UITweaks\\ui_config.ini")
+#define UI_INI_PATH PLUGIN_PATH("ui_config.ini")
 
 // Global config instance
 UIConfig config;

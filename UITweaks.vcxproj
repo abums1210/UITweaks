@@ -143,6 +143,11 @@
     <TargetName>UITweaks.SA</TargetName>
     <TargetExt>.asi</TargetExt>
   </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ResourceCompile>
+      <PreprocessorDefinitions>TARGET_FILENAME=\"$(TargetName).asi\";TARGET_INTERNALNAME=\"$(TargetName)\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release GTA3|Win32'">
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -333,6 +338,9 @@
     <None Include=".clang-format" />
     <None Include=".gitattributes" />
     <None Include=".gitignore" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="UITweaks.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
