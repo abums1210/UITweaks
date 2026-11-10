@@ -1,5 +1,6 @@
 #include "includes/Hooks.h"
 #include "includes/UIConfig.h"
+#include "includes/InputHandler.h"
 #include <plugin.h>
 
 #ifdef GTASA
@@ -17,9 +18,10 @@ static const unsigned short validStats[] = { 21, 22, 23, 68, 160, 163, 165, 225 
 
 static void OnGameProcess() {
     if (config.ReloadKey != 0) {
-        if (config.ReloadKey == -1 || KeyPressed(config.ReloadKey)) {
+        if (config.ReloadKey == -1 || InputHandler::IsKeyJustPressed(config.ReloadKey)) {
             config.Read();
         }
+        InputHandler::UpdateOldKeyState();
     }
 }
 
@@ -33,12 +35,12 @@ static void OnDrawHud() {
     int index;
 #endif
 
-    if (KeyPressed('Z')) {
+    if (InputHandler::IsKeyJustPressed('Z')) {
         Hooks::TriggerHudInfoDisplay();
     }
 
 #ifdef GTASA
-    if (KeyPressed('L')) {
+    if (InputHandler::IsKeyJustPressed('L')) {
         now = CTimer::m_snTimeInMilliseconds;
         if (now - lastPressTime > 250) {
             lastPressTime = now;
@@ -48,7 +50,7 @@ static void OnDrawHud() {
         }
     }
 
-    if (KeyPressed('U')) {
+    if (InputHandler::IsKeyJustPressed('U')) {
         now = CTimer::m_snTimeInMilliseconds;
         if (now - lastPressTime > 250) {
             lastPressTime = now;

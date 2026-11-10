@@ -327,12 +327,16 @@
     <ClCompile Include="src\ConfigHelper.cpp" />
     <ClCompile Include="src\UIConfig.cpp" />
     <ClCompile Include="src\Hooks.cpp" />
+    <ClCompile Include="src\InputHandler.cpp" />
+    <ClCompile Include="src\ProcessHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\ConfigHelper.h" />
     <ClInclude Include="includes\UIConfig.h" />
     <ClInclude Include="includes\Hooks.h" />
     <ClInclude Include="includes\SomeMacros.h" />
+    <ClInclude Include="includes\InputHandler.h" />
+    <ClInclude Include="includes\ProcessHelper.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".clang-format" />
