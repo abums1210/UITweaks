@@ -11,6 +11,7 @@ class UIConfig {
     float SubtitleOffsetR;
 
     int VCSlantToggle;
+    bool CapitalizeZoneText, CapitalizeVehicleText, CapitalizeMissionText;
     CVector2D ZoneVehicleMissionScale;
     float ZoneBottom;
     float VehicleBottom;

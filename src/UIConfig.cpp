@@ -15,6 +15,9 @@ UIConfig::UIConfig() {
     SubtitleBoxWidth = 400.0f;
 
     VCSlantToggle = 0;
+    CapitalizeZoneText = false;
+    CapitalizeVehicleText = false;
+    CapitalizeMissionText = false;
 #ifdef GTAVC
     ZoneVehicleMissionScale = CVector2D(0.7f, 1.4f);
     ZoneBottom = 15.0f;
@@ -68,6 +71,9 @@ bool UIConfig::Read() {
     SubtitleOffsetL = cfgUI.ReadInt("Settings", "SubtitleOffsetL", SubtitleOffsetL);
     SubtitleOffsetR = cfgUI.ReadInt("Settings", "SubtitleOffsetR", SubtitleOffsetR);
     VCSlantToggle = cfgUI.ReadInt("Settings", "VCSlantToggle", VCSlantToggle);
+    CapitalizeZoneText = cfgUI.ReadInt("Settings", "CapitalizeZoneText", CapitalizeZoneText ? 1 : 0) != 0;
+    CapitalizeVehicleText = cfgUI.ReadInt("Settings", "CapitalizeVehicleText", CapitalizeVehicleText ? 1 : 0) != 0;
+    CapitalizeMissionText = cfgUI.ReadInt("Settings", "CapitalizeMissionText", CapitalizeMissionText ? 1 : 0) != 0;
     ZoneVehicleMissionScale = cfgUI.ReadVec("Settings", "ZoneVehicleMissionScale", ZoneVehicleMissionScale);
     ZoneBottom = cfgUI.ReadInt("Settings", "ZoneBottom", ZoneBottom);
     VehicleBottom = cfgUI.ReadInt("Settings", "VehicleBottom", VehicleBottom);
@@ -100,6 +106,9 @@ void UIConfig::Write() {
     cfgUI.WriteInt("Settings", "SubtitleOffsetL", SubtitleOffsetL, "Subtitle left offset");
     cfgUI.WriteInt("Settings", "SubtitleOffsetR", SubtitleOffsetR, "Subtitle right offset");
     cfgUI.WriteInt("Settings", "VCSlantToggle", VCSlantToggle, "VC Slant toggle (0 = off, 1 = on)");
+    cfgUI.WriteInt("Settings", "CapitalizeZoneText", CapitalizeZoneText, "Capitalize zone text (0 = off, 1 = on)");
+    cfgUI.WriteInt("Settings", "CapitalizeVehicleText", CapitalizeVehicleText, "Capitalize vehicle text (0 = off, 1 = on)");
+    cfgUI.WriteInt("Settings", "CapitalizeMissionText", CapitalizeMissionText, "Capitalize mission text (0 = off, 1 = on)");
     cfgUI.WriteVec("Settings", "ZoneVehicleMissionScale", ZoneVehicleMissionScale,
                    "Zone/Vehicle/Mission text scale (x = width, y = height)");
     cfgUI.WriteInt("Settings", "ZoneBottom", ZoneBottom, "Zone bottom position");

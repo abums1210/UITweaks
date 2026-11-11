@@ -37,38 +37,82 @@ using namespace plugin;
 
 static float barX = 0.0f, barY = 0.0f, barWidth = 0.0f, barHeight = 0.0f, barProgress = 0.0f;
 
+static ZVMChar *CapitalizeText(const ZVMChar *src) {
+    static ZVMChar buffer[4][256];
+    static int bufIdx = 0;
+    ZVMChar *buf;
+    bool bInToken;
+    int i;
+
+    if (!src)
+        return nullptr;
+
+    buf = buffer[bufIdx];
+    bufIdx = (bufIdx + 1) % 4;
+
+    bInToken = false;
+    for (i = 0; src[i] != 0 && i < 255; i++) {
+        if (src[i] == '~') {
+            bInToken = !bInToken;
+            buf[i] = src[i];
+            continue;
+        }
+        if (bInToken) {
+            buf[i] = src[i];
+            continue;
+        }
+
+#ifndef GTASA
+        buf[i] = (ZVMChar)towupper(src[i]);
+#else
+        buf[i] = (ZVMChar)toupper((unsigned char)src[i]);
+#endif
+    }
+    buf[i] = 0;
+    return buf;
+}
+
 static void __cdecl PrintZone(float x, float y, ZVMChar *text) {
     float rightPos, bottomPos;
+    ZVMChar *printText;
+
     if (!text || text[0] == '\0')
         return;
+    printText = config.CapitalizeZoneText ? CapitalizeText(text) : text;
     rightPos = SCREEN_SCALE_FROM_RIGHT(config.ZoneVehicleMissionRight);
     bottomPos = SCREEN_SCALE_FROM_BOTTOM(config.ZoneBottom);
     CFont::SetScale(SCREEN_SCALE_X(config.ZoneVehicleMissionScale.x), SCREEN_SCALE_Y(config.ZoneVehicleMissionScale.y));
     if (!config.VCSlantToggle)
         CFont::SetSlant(0.0f);
-    CFont::ZVHPrintString(rightPos, bottomPos, text);
+    CFont::ZVHPrintString(rightPos, bottomPos, printText);
 }
 
 static void __cdecl PrintVehicle(float x, float y, ZVMChar *text) {
     float rightPos, bottomPos;
+    ZVMChar *printText;
+
     if (!text || text[0] == '\0')
         return;
+    printText = config.CapitalizeVehicleText ? CapitalizeText(text) : text;
     rightPos = SCREEN_SCALE_FROM_RIGHT(config.ZoneVehicleMissionRight);
     bottomPos = SCREEN_SCALE_FROM_BOTTOM(config.VehicleBottom);
     CFont::SetScale(SCREEN_SCALE_X(config.ZoneVehicleMissionScale.x), SCREEN_SCALE_Y(config.ZoneVehicleMissionScale.y));
     if (!config.VCSlantToggle)
         CFont::SetSlant(0.0f);
-    CFont::ZVHPrintString(rightPos, bottomPos, text);
+    CFont::ZVHPrintString(rightPos, bottomPos, printText);
 }
 
 static void __cdecl PrintMission(float x, float y, ZVMChar *text) {
     float rightPos, bottomPos;
+    ZVMChar *printText;
+
     if (!text || text[0] == '\0')
         return;
+    printText = config.CapitalizeMissionText ? CapitalizeText(text) : text;
     rightPos = SCREEN_SCALE_FROM_RIGHT(config.ZoneVehicleMissionRight);
     bottomPos = SCREEN_SCALE_FROM_BOTTOM(config.MissionBottom);
     CFont::SetScale(SCREEN_SCALE_X(config.ZoneVehicleMissionScale.x), SCREEN_SCALE_Y(config.ZoneVehicleMissionScale.y));
-    CFont::ZVHPrintString(rightPos, bottomPos, text);
+    CFont::ZVHPrintString(rightPos, bottomPos, printText);
 }
 
 static void __cdecl PrintRadioStation(float x, float y, ZVMChar *text) {
